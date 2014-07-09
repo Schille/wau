@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title></title>
-	</head>
-	<body>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/wau.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Dosis' rel='stylesheet' type='text/css'>
+ <script src="https://maps.googleapis.com/maps/api/js"></script>
+ <script src="js/webapp.js"></script>
 
-	</body>
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div id="stream">
+	<div id="head">
+		<img src="img/logo.png" class="logo"> <div id="logo-text">WAU </div>
+	</div>
+	<div id="search">
+		<form>
+				<input name="search" type="search" required placeholder="Search Tags & Locations" 
+					onfocus="if(this.value == 'Search Tags & Locations') { this.value = ''; 
+					this.style.color = '#692231';}" spellcheck="false" >
+
+				<button type="submit"  id="submit-button">
+					<img src="img/search.png" alt="Search" class="search-image">
+				</button>
+
+			</form>
+	</div>
+
+	<div class="stream-item">
+		<div class="stream-item-location">Stuttgart	</div>
+		<img src="./img/logo.png" class="stream-item-img">
+		<div class="stream-item-tags">sommer</div>
+	 </div>
+	<div class="stream-item"> 
+		<div class="stream-item-location">Stuttgart	</div>
+		<img src="img/logo.png" class="stream-item-img">
+		<div class="stream-item-tags">sommer</div>
+	</div>
+
+
+	</div>
+	<div id="map"> </div>
+	
+</div>
+
+
+</body>
+
 </html>
