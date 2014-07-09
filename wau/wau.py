@@ -1,12 +1,13 @@
 import os
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
 # Show index 
 @app.route('/')
 def show_index():
-	return 'index'
+	return render_template('index.html')
 
 # Show single image
 @app.route('/image/<uuid>')
