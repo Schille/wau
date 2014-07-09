@@ -82,7 +82,7 @@ if(streamHeight*0.97 < windowHeight+$('#stream').scrollTop()) {
 
 function loadContent() {
 
-document.domain = "http://mybluemix.net";
+document.domain = "mybluemix.net";
 
 $.getJSON( "http://wau-api.mybluemix.net/img/latest", function( data ) {
   console.log(data);
