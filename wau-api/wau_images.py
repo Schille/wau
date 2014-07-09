@@ -63,21 +63,6 @@ def store_image(b64_image, lat, long, tag):
     print('saved idb entry - id: ' + doc_id)
     return True
 
-def get_image(uuid):
-    #get the image from DB:images
-    doc = db_images[uuid]
-    #decode the value, return the picture
-    return StringIO.StringIO(base64.b64decode(doc['b64_image']))
-
-
-def get_recent_images(start_key):
-    if start_key:
-        print('DEBUG')
-        reuslt =  db_idb.view('dates/recent', descending=True, startkey=str(start_key))
-        print(len(reuslt))
-        return reuslt
-    else:
-        return db_idb.view('dates/recent', descending=True, limit=LIMIT)
     
 def __base64_to_image(image_str):
     image_string = StringIO.StringIO(base64.b64decode(image_str))
