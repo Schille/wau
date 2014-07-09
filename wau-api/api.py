@@ -8,16 +8,22 @@ app = Flask(__name__)
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_image():
 	if request.method == 'POST':
-		image = request.files['image']
+		b64_image = request.form['b64_image']
+		#tags = request.form['tags']
+		if wau_images.store_image(b64_image, None):
+			return ''
+		else:
+			abort(500)
 	else:
-		abort(500)
+		abort(405)
+
 
 # Return image
 @app.route('/img/<uuid>')
 def get_image(uuid):
 	jpg = wau_images.get_image(uuid)
 	if jpg:
-		return send_file(jpg, mimetype='image/gif')
+		return send_file(jpg, mimetype='image/jpg')
 	else:
 		abort(404)
 
