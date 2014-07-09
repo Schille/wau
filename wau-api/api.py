@@ -23,25 +23,6 @@ def upload_image():
 			abort(500)
 	else:
 		abort(405)
-
-
-# Return image
-@app.route('/img/<uuid>')
-def get_image(uuid):
-	jpg = wau_images.get_image(uuid)
-	if jpg:
-		return send_file(jpg, mimetype='image/jpg')
-	else:
-		abort(404)
-		
-@app.route('/img/latest')
-def get_latest():
-	start_key = request.args.get('startkey')
-	print(start_key)
-	result = list()
-	for obj in wau_images.get_recent_images(start_key):
-		result.append(obj['value'])
-	return Response(json.dumps(result), mimetype='text/json')
 		
 	
 
