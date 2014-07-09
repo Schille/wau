@@ -8,12 +8,13 @@ app = Flask(__name__)
 # Upload image
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_image():
-	if request.method == 'POST':
+	if request.method == 'POST' and request.form['b64_image'] is not None:
 		b64_image = request.form['b64_image']
 		#tags = request.form['tags']
 		if wau_images.store_image(b64_image, None):
 			return ''
 		else:
+			print('DEBUG')
 			abort(500)
 	else:
 		abort(405)
