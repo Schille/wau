@@ -54,9 +54,9 @@ function createStreamItem (jsonObject) {
 
 
 }
-      var ob =  {id: "1", tPath: 'img/logo.png', city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.776882, latitude: 9.181484};
-      var ob2 = {id: "2", tPath: 'img/logo.png', city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.767992, latitude: 9.172594};
-      var ob3 = {id: "3", tPath: 'img/logo.png', city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.755772, latitude: 9.190374};
+      var ob =  {id: "1", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.776882, latitude: 9.181484};
+      var ob2 = {id: "2", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.767992, latitude: 9.172594};
+      var ob3 = {id: "3", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.755772, latitude: 9.190374};
 
 function loadContent() {
 
