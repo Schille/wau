@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/wau.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/wau.css') }}" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Dosis' rel='stylesheet' type='text/css'>
  <script src="https://maps.googleapis.com/maps/api/js"></script>
- <script src="js/webapp.js"></script>
+ <script src="{{ url_for('static', filename='js/webapp.js') }}"></script>
 
 </head>
 
@@ -15,7 +14,7 @@
 <div id="wrapper">
 	<div id="stream">
 	<div id="head">
-		<img src="img/logo.png" class="logo"> <div id="logo-text">WAU </div>
+		<img src="{{ url_for('static', filename='img/logo.png') }}" class="logo"> <div id="logo-text">WAU </div>
 	</div>
 	<div id="search">
 		<form>
@@ -24,7 +23,7 @@
 					this.style.color = '#692231';}" spellcheck="false" >
 
 				<button type="submit"  id="submit-button">
-					<img src="img/search.png" alt="Search" class="search-image">
+					<img src="{{ url_for('static', filename='img/search.png') }}" alt="Search" class="search-image">
 				</button>
 
 			</form>
@@ -32,12 +31,12 @@
 
 	<div class="stream-item">
 		<div class="stream-item-location">Stuttgart	</div>
-		<img src="./img/logo.png" class="stream-item-img">
+		<img src="{{ url_for('static', filename='img/logo.png') }}" class="stream-item-img">
 		<div class="stream-item-tags">sommer</div>
 	 </div>
 	<div class="stream-item"> 
 		<div class="stream-item-location">Stuttgart	</div>
-		<img src="img/logo.png" class="stream-item-img">
+		<img src="{{ url_for('static', filename='img/logo.png') }}" class="stream-item-img">
 		<div class="stream-item-tags">sommer</div>
 	</div>
 
