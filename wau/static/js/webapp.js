@@ -30,10 +30,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function createStreamItem (jsonObject) {
 
-  var thumbPath = jsonObject.tPath;
-  var pPath = jsonObject.pPath;
+  var uri = "http://wau.mybluemix.net/img/"
 
-  var objectId = jsonObject.id;
+  var thumbPath = uri+jsonObject.thumb_id;
+  var pPath = uri+jsonObject.image_id;
+
+ 
 
   var location = jsonObject.city +", "+jsonObject.country;
   var tagList = jsonObject.tags;
@@ -84,21 +86,17 @@ function loadContent() {
 
 
 $.getJSON( "http://wau-api.mybluemix.net/img/latest", function( data ) {
-  console.log(data);
+  data.forEach(function(object) {
+    createStreamItem(object);
+    addMarker(object.long, object.lat, object._id);
+  });
 });
 
 
-
-        var objectList = [ob, ob2, ob3];
-
+        
 
 
-        for (i = 0; i < objectList.length; i++) {
-          createStreamItem(objectList[i]);
-
-          addMarker(objectList[i].longitude, objectList[i].latitude, objectList[i].id);
-
-        }
+       
 
       }
 
