@@ -2,6 +2,7 @@ import os
 from flask import *
 import wau_images
 
+
 app = Flask(__name__)
 
 # Upload image
