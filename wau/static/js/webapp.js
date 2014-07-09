@@ -58,9 +58,41 @@ function createStreamItem (jsonObject) {
       var ob2 = {id: "2", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.767992, latitude: 9.172594};
       var ob3 = {id: "3", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.755772, latitude: 9.190374};
 
+
+$(document).ready(function(){
+$('#stream').scroll(function () {
+ 
+
+var windowHeight = $(window).height();
+var streamHeight = $('#stream')[0].scrollHeight;
+
+console.log();
+$('#stream').hide().show();
+console.log();
+if(streamHeight*0.97 < windowHeight+$('#stream').scrollTop()) {
+  loadContent();
+}
+
+
+});
+});
+
+
+
+
 function loadContent() {
 
-        //Get json here
+document.domain = "http://mybluemix.net";
+
+$.getJSON( "http://wau-api.mybluemix.net/img/latest", function( data ) {
+  console.log(data);
+});
+
+        $.ajax({
+  type: "GET",
+  url: "test.js",
+  dataType: "script"
+});
 
         var objectList = [ob, ob2, ob3];
 
