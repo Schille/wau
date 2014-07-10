@@ -110,5 +110,25 @@ form input[type=search] {
 }
 
 .stream-item-tags {
+
+}
+
+.stream-item-tag {
 	cursor: pointer;
 }
+
+
+
+
+
+#template-border {
+		border: 1px #E5E5DD solid;
+		padding: 8px;
+
+
+}
+
+#templat-border img {
+	width: 800px;
+}
+

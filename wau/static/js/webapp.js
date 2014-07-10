@@ -5,7 +5,7 @@ var markersArray = [];
 var thumbArray = [];
 var noMoreRequest = false;
 
-var requestURL = "";
+var requestURL = "http://wau.mybluemix.net/img/latest";
 
 
 function initialize() {
@@ -60,7 +60,7 @@ function createStreamItem (jsonObject) {
   var streamItemTags = $(document.createElement('div')).addClass('stream-item-tags');
   if(tagList)
     tagList.forEach( function(object, index) {
-      streamItemTags.append($(document.createElement('span')).text(object+" ").click(function () {
+      streamItemTags.append($(document.createElement('span')).addClass('stream-item-tag').text(object+" ").click(function () {
         search(object);
       }));
       
@@ -116,8 +116,9 @@ function loadContent() {
   if (noMoreRequest)
     return;
   if(requestURL != "http://wau.mybluemix.net/img/latest")
+    return;
 
-  requestURL = "http://wau.mybluemix.net/img/latest";
+  
   if (lastDate == 0) {
     $.getJSON( requestURL, function( data ) {
       lastDate = data[data.length-1].date_taken;
@@ -177,11 +178,11 @@ function search(tag) {
   else
     searchTag = tag;
 
-  requestURL = "http://wau.mybluemix.net/search?tags="+searchTag;
+  requestURL = "http://wau.mybluemix.net/search?tags=";
 
   $.ajax({
     type: 'GET',
-    url: requestURL,
+    url: requestURL+searchTag,
     dataType: 'json',
     success: function( data ) {
       console.log(data);
