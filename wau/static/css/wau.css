@@ -92,7 +92,7 @@ form input[type=search] {
 	font-family: 'Dosis', sans-serif;
 	font-weight: 300;
 	color: #C2BAAB;
-	height: 55px;
+	height: 20px;
 	width: 80%;
 
 
@@ -110,5 +110,5 @@ form input[type=search] {
 }
 
 .stream-item-tags {
-
+	cursor: pointer;
 }

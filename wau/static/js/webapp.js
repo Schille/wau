@@ -49,15 +49,22 @@ function createStreamItem (jsonObject) {
   var location = jsonObject.city +", "+jsonObject.country;
   var tagList = jsonObject.tags;
 
-  var streamItem = $(document.createElement('div')).addClass('stream-item').attr('id', objectId);
+  var streamItem = $(document.createElement('div')).addClass('stream-item');
 
   var streamItemLoc = $(document.createElement('div')).addClass('stream-item-location').text(location);
 
-  var streamItemImg = $(document.createElement('img')).addClass('stream-item-img');
+  var streamItemImg = $(document.createElement('img')).addClass('stream-item-img').attr('id', objectId);
 
   streamItemImg.attr('src', thumbPath);
 
-  var streamItemTags = $(document.createElement('div')).addClass('stream-item-tags').text(tagList);
+  var streamItemTags = $(document.createElement('div')).addClass('stream-item-tags');
+  if(tagList)
+    tagList.forEach( function(object, index) {
+      streamItemTags.append($(document.createElement('span')).text(object+" ").click(function () {
+        search(object);
+      }));
+      
+    });
 
   streamItem.append(streamItemLoc).append(streamItemImg).append(streamItemTags);
 
@@ -72,14 +79,14 @@ var block = false;
 
 $(document).ready(function(){
 
-  $('#search-form').submit(function(){
-    $('input[type=submit]', this).attr('disabled', 'disabled');
-});
 
 
-$('submit-button').click(function() {
-  search();
-});
+
+  $('#search-form').submit(function() {
+    search();
+
+    return false;
+  });
 
 
   if (block == true)
@@ -88,7 +95,7 @@ $('submit-button').click(function() {
   loadContent();
   $('#stream').scroll( function () {
 
-    
+
 
     var windowHeight = $(window).height();
     var streamHeight = $('#stream')[0].scrollHeight;
@@ -108,6 +115,7 @@ $('submit-button').click(function() {
 function loadContent() {
   if (noMoreRequest)
     return;
+  if(requestURL != "http://wau.mybluemix.net/img/latest")
 
   requestURL = "http://wau.mybluemix.net/img/latest";
   if (lastDate == 0) {
@@ -127,70 +135,73 @@ function loadContent() {
   else {
 
     $.ajax({
-    type: 'GET',
-    url: requestURL+"?startkey="+lastDate,
-    dataType: 'json',
-    success: function( data ) {
-    
-     lastDate = data[data.length-1].date_taken;
-      data.forEach(function(object, index) {
+      type: 'GET',
+      url: requestURL+"?startkey="+lastDate,
+      dataType: 'json',
+      success: function( data ) {
+
+       lastDate = data[data.length-1].date_taken;
+       data.forEach(function(object, index) {
         if (data.length == 1)
           noMoreRequest = true;
         if(index != 0) {
 
-        createStreamItem(object);
-        addMarker(object.long, object.lat, object._id);
+          createStreamItem(object);
+          addMarker(object.long, object.lat, object._id);
         }
         else
           return;
 
       });
 
-      
-      block = false;
-      
 
-    },
-    data: {},
-    async: false
-});
-   
+       block = false;
+
+
+     },
+     data: {},
+     async: false
+   });
+
   }
   
   console.log("load");
 }
 
-function search() {
+function search(tag) {
 
   wipeDisplayData();
 
-  requestURL = "http://wau.mybluemix.net/img/search";
+  if(!tag)
+    var searchTag = $('#search-field').val();
+  else
+    searchTag = tag;
 
-   $.ajax({
+  requestURL = "http://wau.mybluemix.net/search?tags="+searchTag;
+
+  $.ajax({
     type: 'GET',
     url: requestURL,
     dataType: 'json',
     success: function( data ) {
-    
+      console.log(data);
+
       data.forEach(function(object, index) {
-        if (data.length == 1)
-          noMoreRequest = true;
-        if(index != 0) {
+
 
         createStreamItem(object);
         addMarker(object.long, object.lat, object._id);
-        }
-        else
-          return;
+        
+
 
       });
 
-}
-});
+    }
+  });
 }
 
 function wipeDisplayData() {
-  
+
   for(i=0; i<markersArray.length; i++) {
     thumbArray[i].remove();
     markersArray[i].setMap(null);
@@ -213,11 +224,11 @@ function addMarker(lati, longi, objectId) {
   });
 
   markersArray.push(marker);
-$("#"+objectId).click(function (){
+  $("#"+objectId).click(function (){
    var latLng = marker.getPosition(); // returns LatLng object
-    map.setCenter(latLng);
-});
- 
+   map.setCenter(latLng);
+ });
+
 
   google.maps.event.addListener(marker, 'mouseover', function() {
    $('#stream').animate({
