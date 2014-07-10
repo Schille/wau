@@ -7,6 +7,7 @@ var noMoreRequest = false;
 
 var requestURL = "";
 
+
 function initialize() {
   var map_canvas = document.getElementById('map');
   var map_options = {
@@ -70,6 +71,17 @@ function createStreamItem (jsonObject) {
 var block = false;
 
 $(document).ready(function(){
+
+  $('#search-form').submit(function(){
+    $('input[type=submit]', this).attr('disabled', 'disabled');
+});
+
+
+$('submit-button').click(function() {
+  search();
+});
+
+
   if (block == true)
     return;
   block = true;
@@ -149,6 +161,9 @@ function loadContent() {
 }
 
 function search() {
+
+  wipeDisplayData();
+
   requestURL = "http://wau.mybluemix.net/img/search";
 
    $.ajax({
