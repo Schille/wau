@@ -177,7 +177,7 @@ function search() {
 function wipeDisplayData() {
   
   for(i=0; i<markersArray.length; i++) {
-    thumbArray[i].erase();
+    thumbArray[i].remove();
     markersArray[i].setMap(null);
   }
   thumbArray.length = 0;
