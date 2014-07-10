@@ -1,4 +1,12 @@
 var map;
+
+var lastDate = 0;
+var markersArray = [];
+var thumbArray = [];
+var noMoreRequest = false;
+
+var requestURL = "";
+
 function initialize() {
   var map_canvas = document.getElementById('map');
   var map_options = {
@@ -35,7 +43,7 @@ function createStreamItem (jsonObject) {
   var thumbPath = uri+jsonObject.thumb_id;
   var pPath = uri+jsonObject.image_id;
 
- 
+  var objectId = jsonObject._id;
 
   var location = jsonObject.city +", "+jsonObject.country;
   var tagList = jsonObject.tags;
@@ -52,71 +60,155 @@ function createStreamItem (jsonObject) {
 
   streamItem.append(streamItemLoc).append(streamItemImg).append(streamItemTags);
 
+  thumbArray.push(streamItem);
+
   $('#stream').append(streamItem);
 
 
 }
-      var ob =  {id: "1", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.776882, latitude: 9.181484};
-      var ob2 = {id: "2", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.767992, latitude: 9.172594};
-      var ob3 = {id: "3", tPath: "static/img/logo.png", city: 'Demmin', country: 'Germany', tags: 'bla', longitude: 48.755772, latitude: 9.190374};
 
+var block = false;
 
 $(document).ready(function(){
-$('#stream').scroll(function () {
- 
-
-var windowHeight = $(window).height();
-var streamHeight = $('#stream')[0].scrollHeight;
-
-console.log();
-$('#stream').hide().show();
-console.log();
-if(streamHeight*0.97 < windowHeight+$('#stream').scrollTop()) {
+  if (block == true)
+    return;
+  block = true;
   loadContent();
-}
+  $('#stream').scroll( function () {
+
+    
+
+    var windowHeight = $(window).height();
+    var streamHeight = $('#stream')[0].scrollHeight;
 
 
-});
+    if(streamHeight*0.97 < windowHeight+$('#stream').scrollTop()) {
+      loadContent();
+    }
+
+
+  });
 });
 
 
 
 
 function loadContent() {
+  if (noMoreRequest)
+    return;
 
-$.getJSON( "http://wau-api.mybluemix.net/img/latest", function( data ) {
-  data.forEach(function(object) {
-    createStreamItem(object);
-    addMarker(object.long, object.lat, object._id);
+  requestURL = "http://wau.mybluemix.net/img/latest";
+  if (lastDate == 0) {
+    $.getJSON( requestURL, function( data ) {
+      lastDate = data[data.length-1].date_taken;
+      data.forEach(function(object) {
+        createStreamItem(object);
+        addMarker(object.long, object.lat, object._id);
+
+      });
+
+      
+
+
+    });
+  }
+  else {
+
+    $.ajax({
+    type: 'GET',
+    url: requestURL+"?startkey="+lastDate,
+    dataType: 'json',
+    success: function( data ) {
+    
+     lastDate = data[data.length-1].date_taken;
+      data.forEach(function(object, index) {
+        if (data.length == 1)
+          noMoreRequest = true;
+        if(index != 0) {
+
+        createStreamItem(object);
+        addMarker(object.long, object.lat, object._id);
+        }
+        else
+          return;
+
+      });
+
+      
+      block = false;
+      
+
+    },
+    data: {},
+    async: false
+});
+   
+  }
+  
+  console.log("load");
+}
+
+function search() {
+  requestURL = "http://wau.mybluemix.net/img/search";
+
+   $.ajax({
+    type: 'GET',
+    url: requestURL,
+    dataType: 'json',
+    success: function( data ) {
+    
+      data.forEach(function(object, index) {
+        if (data.length == 1)
+          noMoreRequest = true;
+        if(index != 0) {
+
+        createStreamItem(object);
+        addMarker(object.long, object.lat, object._id);
+        }
+        else
+          return;
+
+      });
+
+}
+});
+}
+
+function wipeDisplayData() {
+  
+  for(i=0; i<markersArray.length; i++) {
+    thumbArray[i].erase();
+    markersArray[i].setMap(null);
+  }
+  thumbArray.length = 0;
+  markersArray.length = 0;
+}
+
+
+
+function addMarker(lati, longi, objectId) {
+  console.log(longi + " " + lati + " " + objectId);
+  var lnglat = new google.maps.LatLng(longi, lati);
+
+  var marker = new google.maps.Marker({
+    position: lnglat,
+    title: '',
+    draggable: false,
+    map: map
   });
 
+  markersArray.push(marker);
+$("#"+objectId).click(function (){
+   var latLng = marker.getPosition(); // returns LatLng object
+    map.setCenter(latLng);
+});
+ 
 
+  google.maps.event.addListener(marker, 'mouseover', function() {
+   $('#stream').animate({
+    scrollTop: ($("#"+objectId).offset().top-$('#stream').scrollTop())
+  }, 200);
+ });
 
-        
-
-
-       
-
-      }
-
-
-      function addMarker(longi, lati, objectId) {
-        var lnglat = new google.maps.LatLng(longi, lati);
-
-        var marker = new google.maps.Marker({
-          position: lnglat,
-          title: '',
-          draggable: false,
-          map: map
-        });
-
-        
-
-        google.maps.event.addListener(marker, 'mouseover', function() {
-           $('#stream').animate({
-                        scrollTop: ($("#"+objectId).offset().top-$('#stream').scrollTop())
-        }, 200);
-        });
-
-      }
+}
 
