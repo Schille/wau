@@ -10,7 +10,14 @@
 </head>
 
 <body>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="wrapper">
 	<div class="headline">
 		<img src="{{ url_for('static', filename='img/logo.png') }}"  class="logo logo-template"> <div id="headline">WAU </div>
@@ -18,7 +25,10 @@
 
 <div>
 	<div id="template-border">
-		<img src="http://wau.mybluemix.net/img/{{ uuid }}">
+		<img src="http://wau.mybluemix.net/img/{{ image_doc['image_id'] }}">
+		{% if image_doc['city'] and image_doc['country'] %}
+		<div class"stream-item-location">@ {{image_doc['city']}}, {{image_doc['country']}}</div>
+		{% endif %}
 		</div>
 
 	</div>
@@ -28,11 +38,10 @@
 		<img src="{{ url_for('static', filename='img/twitter.png') }}" class="social-icon">
 		<img src="{{ url_for('static', filename='img/pinterest.png') }}" class="social-icon">
 		<img src="{{ url_for('static', filename='img/linkedin.png') }}" class="social-icon">
+		<div class="fb-comments" data-href="http://wau.mybluemix.net/image/{{ image_doc['image_id'] }}" data-numposts="5" data-width="350" data-colorscheme="light"></div>
 	</div> 
 	</div>
-	
 </div>
-
 
 </body>
 
