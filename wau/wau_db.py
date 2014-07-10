@@ -34,6 +34,6 @@ def search_for_tags(tags):
 		tag_id = tag['id']
 		tag_doc = db_idb[tag_id]
 		for target in tag_doc['targets']:
-			target_doc = db_idb['target']
+			target_doc = db_idb[target]
 			targets.add(target_doc)
 	return targets
