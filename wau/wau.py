@@ -13,7 +13,7 @@ def show_index():
 # Show single image
 @app.route('/image/<uuid>')
 def show_image(uuid=None):
-	return render_template('template.html', uuid)
+	return render_template('template.html', uuid=uuid) 
 
 # Return image
 @app.route('/img/<uuid>')
