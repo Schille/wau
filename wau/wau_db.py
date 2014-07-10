@@ -30,11 +30,11 @@ def search_for_tags(tags):
 	query = 'https://{}:{}@{}.cloudant.com/idb/_design/view/_search/tag?query=tagname:{}'.format(KEY_IMAGES, PASS_IMAGES, USERNAME, tags)
 	response = json.loads(requests.get(query).text)
 	targets = list()
-    for tag in response['rows']:
-        tag_id = tag['id']
-        tag_doc = db_idb[tag_id]
-        for target in tag_doc['targets']:
-            target_doc = db_idb[target]
-            if target_doc not in targets:
-                targets.append(target_doc)
+	for tag in response['rows']:
+        	tag_id = tag['id']
+	        tag_doc = db_idb[tag_id]
+		for target in tag_doc['targets']:
+			target_doc = db_idb[target]
+		        if target_doc not in targets:
+                		targets.append(target_doc)
 	return targets
