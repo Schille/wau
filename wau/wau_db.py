@@ -14,6 +14,9 @@ db_images = couch['images']
 db_idb = couch['idb']
 LIMIT = 10
 
+def get_image_doc(idb_uuid):
+	return db_idb[idb_uuid]
+
 def get_recent_images(start_key):
     if start_key:
         return db_idb.view('dates/recent', startkey=int(start_key), descending=True, limit=LIMIT)

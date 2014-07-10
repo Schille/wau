@@ -13,7 +13,8 @@ def show_index():
 # Show single image
 @app.route('/image/<uuid>')
 def show_image(uuid=None):
-	return render_template('template.html', uuid=uuid) 
+	image_doc = wau_db.get_image_doc(uuid)
+	return render_template('template.html', image_doc=image_doc) 
 
 # Return image
 @app.route('/img/<uuid>')
