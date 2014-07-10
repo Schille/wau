@@ -36,6 +36,7 @@
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/index.html \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/js \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/plugins \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/PushNotification.js \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/css/index.css \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/img/cam.png \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/assets/www/img/id3.png \

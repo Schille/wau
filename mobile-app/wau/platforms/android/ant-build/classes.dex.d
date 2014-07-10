@@ -1,5 +1,11 @@
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes.dex : \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/plugin/gcm/CordovaGCMBroadcastReceiver.class \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/plugin/gcm/GCMIntentService.class \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/plugin/gcm/PushHandlerActivity.class \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/plugin/gcm/PushPlugin.class \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/wau/app/BuildConfig.class \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/wau/app/Manifest$permission.class \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/wau/app/Manifest.class \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/wau/app/R$attr.class \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/wau/app/R$drawable.class \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/com/wau/app/R$string.class \
@@ -65,3 +71,5 @@
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/org/apache/cordova/filetransfer/FileTransfer.class \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/classes/org/apache/cordova/filetransfer/FileUploadResult.class \
 /Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/dexedLibs/classes-15d2e4dc6dd45ee6fc5d60f62a4cdb84.jar \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/dexedLibs/gcm-fb3733d2a108dd0aae403558a1fd3860.jar \
+/Users/roddirockz/wau/mobile-app/wau/platforms/android/ant-build/dexedLibs/android-support-v13-7da8818d41cc7d395a61490f15212efb.jar \
