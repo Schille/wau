@@ -53,6 +53,8 @@ function createStreamItem (jsonObject) {
 
   var streamItemLoc = $(document.createElement('div')).addClass('stream-item-location').text(location);
 
+  var streamImgLink = $(document.createElement('a')).attr('href', 'http://wau.mybluemix.net/image/'+objectId);
+
   var streamItemImg = $(document.createElement('img')).addClass('stream-item-img').attr('id', objectId);
 
   streamItemImg.attr('src', thumbPath);
@@ -66,7 +68,7 @@ function createStreamItem (jsonObject) {
       
     });
 
-  streamItem.append(streamItemLoc).append(streamItemImg).append(streamItemTags);
+  streamItem.append(streamItemLoc).append(streamImgLink.append(streamItemImg)).append(streamItemTags);
 
   thumbArray.push(streamItem);
 
@@ -220,22 +222,55 @@ function addMarker(lati, longi, objectId) {
   var marker = new google.maps.Marker({
     position: lnglat,
     title: '',
+    animation: google.maps.Animation.DROP,
     draggable: false,
     map: map
   });
 
   markersArray.push(marker);
-  $("#"+objectId).click(function (){
-   var latLng = marker.getPosition(); // returns LatLng object
-   map.setCenter(latLng);
+  $("#"+objectId).mouseenter(function (){
+
+    function toggleBounce() {
+
+      if (marker.getAnimation() != null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    toggleBounce();
+ 
  });
+
+
+  $("#"+objectId).mouseleave(function (){
+
+    function toggleBounce() {
+
+      if (marker.getAnimation() != null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    toggleBounce();
+ 
+ });
+
+  
 
 
   google.maps.event.addListener(marker, 'mouseover', function() {
    $('#stream').animate({
     scrollTop: ($("#"+objectId).offset().top-$('#stream').scrollTop())
   }, 200);
+
+
+
  });
 
 }
+
+
+
 
