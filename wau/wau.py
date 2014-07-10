@@ -32,6 +32,7 @@ def get_latest():
 		result.append(obj['value'])
 	return Response(json.dumps(result), mimetype='text/json')
 
+
 # Run the app
 port = os.getenv('VCAP_APP_PORT', '5000')
 if __name__ == "__main__":

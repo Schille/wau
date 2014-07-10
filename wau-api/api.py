@@ -14,10 +14,13 @@ def upload_image():
 		b64_image = request.form['b64_image']
 		lat = request.form['lat']
 		long = request.form['long']
+		tags = None
+		#tags = request.form['tags']
+		
 		
 		
 		#tags = request.form['tags']
-		if wau_images.store_image(b64_image, lat, long, None):
+		if wau_images.store_image(b64_image, lat, long, tags):
 			return ''
 		else:
 			abort(500)
