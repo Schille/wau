@@ -2,6 +2,7 @@ import couchdb
 import StringIO
 import base64
 import json
+import requests
 
 USERNAME = '4130eca0-56cb-4702-b21b-d6b68101e520-bluemix'
 KEY_IMAGES = 'angstiouldallikedstsedle'
