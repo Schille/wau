@@ -23,7 +23,8 @@ def get_image(uuid):
 		return send_file(jpg, mimetype='image/jpg')
 	else:
 		abort(404)
-		
+
+# Get latest images		
 @app.route('/img/latest')
 def get_latest():
 	start_key = request.args.get('startkey')
@@ -32,6 +33,13 @@ def get_latest():
 		result.append(obj['value'])
 	return Response(json.dumps(result), mimetype='text/json')
 
+# Search for tags
+@app.route('/search')
+def search_for_tags():
+	tags = request.args.get('tags')
+	targets = list(wau_db.search_for_tags(tags))
+	targets.sort(key=lambda x: x['date_taken'], reverse=True)
+	return Response(json.dumps(targets), mimetype='text/json')
 
 # Run the app
 port = os.getenv('VCAP_APP_PORT', '5000')
