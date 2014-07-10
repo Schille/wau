@@ -10,6 +10,7 @@ import base64
 import couchdb
 import StringIO
 import time
+import requests
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 
@@ -26,7 +27,7 @@ LIMIT = 10
 
 
 
-def store_image(b64_image, lat, long, tag):
+def store_image(b64_image, lat, long, tags):
     #process image, create a shrinked thumbnail
     print('Convert b64_image to Image')
     image = __base64_to_image(b64_image)
@@ -61,6 +62,30 @@ def store_image(b64_image, lat, long, tag):
       #'country' : None,
     })
     print('saved idb entry - id: ' + doc_id)
+    
+    if tags:
+        all_tags = tags.replace(' ', ',')
+        #all tags as list
+        list_tags = tags.split()
+        query = 'https://{}:{}@{}.cloudant.com/idb/_design/view/_search/tag?query=tagname:{}'.format(KEY_IMAGES, PASS_IMAGES, USERNAME, all_tags)
+        response = json.loads(requests.get(query).text)
+        print(response)
+        #process already existing tags
+        for tag in response['rows']:
+            #remove from the to-be-created list
+            list_tags.remove(tag['fields']['tagname'])
+            id = tag['id']
+            doc = db_idb[id]
+            doc['targets'].append(doc_id)
+            #update the new document
+            db_idb.save(doc)
+
+        #process new tags
+        for newtag in list_tags:
+            doc = {'tagname' : newtag, 'targets' : [doc_id]}
+            db_idb.save(doc)
+            
+    
     return True
 
     
