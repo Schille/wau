@@ -12,19 +12,24 @@
 <body>
 
 <div id="wrapper">
-	<div id="head">
-		<img src="{{ url_for('static', filename='img/logo.png') }}" class="logo"> <div id="headline">WAU </div>
+	<div class="headline">
+		<img src="{{ url_for('static', filename='img/logo.png') }}"  class="logo logo-template"> <div id="headline">WAU </div>
 	</div>
 
-	<div id="template-border"></div>
+<div>
+	<div id="template-border">
 		<img src="http://wau.mybluemix.net/img/{{ uuid }}">
-
+		</div>
 
 	</div>
 	<div id="template-infos">
-		
+		Share on: <br>
+		<img src="{{ url_for('static', filename='img/facebook.png') }}" class="social-icon">
+		<img src="{{ url_for('static', filename='img/twitter.png') }}" class="social-icon">
+		<img src="{{ url_for('static', filename='img/pinterest.png') }}" class="social-icon">
+		<img src="{{ url_for('static', filename='img/linkedin.png') }}" class="social-icon">
 	</div> 
-	
+	</div>
 	
 </div>
 

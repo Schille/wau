@@ -13,6 +13,7 @@ div {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	color: #B8B1B0;
 }
 
 
@@ -124,17 +125,45 @@ form input[type=search] {
 #template-border {
 		border: 1px #E5E5DD solid;
 		padding: 8px;
-
+		margin-left: 30px;
+		width: 70%;
+		float: left;
+		display: inline-block;
 
 }
 
-#templat-border img {
-	width: 80%;
+
+#template-border > img {
+	width: 100%;
 }
 
+#template-infos {
+	border: 1px #E5E5DD solid;
+	display: inline-block;
+	float: left;
+	padding: 8px;
+	width: 20%;
+	margin-left: 20px;
+}
 
+.logo-template {
+	height: 100px;
+	width: auto;
+
+}
 
 .headline {
-	text-align: center;
-	font-size: 3em;
+	margin-top: 10px;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #B8B1B0;
+
+	font-size: 6em;
+}
+
+.social-icon {
+	margin: 3px;
+	height: 40px;
+	width: auto;
 }
