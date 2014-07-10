@@ -13,7 +13,7 @@ def show_index():
 # Show single image
 @app.route('/image/<uuid>')
 def show_image(uuid=None):
-	return 'image ' + uuid
+	return render_templte('template.html', uuid)
 
 # Return image
 @app.route('/img/<uuid>')
@@ -40,6 +40,7 @@ def search_for_tags():
 	targets = list(wau_db.search_for_tags(tags))
 	targets.sort(key=lambda x: x['date_taken'], reverse=True)
 	return Response(json.dumps(targets), mimetype='text/json')
+
 
 # Run the app
 port = os.getenv('VCAP_APP_PORT', '5000')
