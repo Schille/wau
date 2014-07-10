@@ -129,6 +129,12 @@ form input[type=search] {
 }
 
 #templat-border img {
-	width: 800px;
+	width: 80%;
 }
 
+
+
+.headline {
+	text-align: center;
+	font-size: 3em;
+}
