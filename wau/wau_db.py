@@ -25,7 +25,7 @@ def get_image(uuid):
     #decode the value, return the picture
     return StringIO.StringIO(base64.b64decode(doc['b64_image']))
 
-def search_for_tags(tags)
+def search_for_tags(tags):
 	query = 'https://{}:{}@{}.cloudant.com/idb/_design/view/_search/tag?query=tagname:{}'.format(KEY_IMAGES, PASS_IMAGES, USERNAME, tags)
 	response = json.loads(requests.get(query).text)
 	targets = set()
